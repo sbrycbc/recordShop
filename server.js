@@ -23,6 +23,8 @@ const db = mongoose.connect(`${process.env.DB_URL}/${process.env.DB_NAME}`)
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(setCors);
+app.use(requestLogger)
 
 
 /** ERROR HANDLING */
