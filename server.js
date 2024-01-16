@@ -8,6 +8,14 @@ const multer = require('multer');
 const cookieParser = require('cookie-parser');
 
 
+/** IMPORTS */
+const usersRouter = require("./routes/users");
+const recordsRouter = require("./routes/records");
+const ordersRouter = require("./routes/orders");
+const { setCors } = require("./middleware/cors");
+const { requestLogger } = require("./middleware/reqLogger.js")
+
+
 /** VARIABLES */
 const port = process.env.PORT || 8000
 const app = express();
@@ -24,7 +32,13 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(setCors);
-app.use(requestLogger)
+app.use(requestLogger);
+
+
+/** ROUTES */
+app.use("/users", usersRouter);
+app.use("/records", recordsRouter);
+app.use("/orders", ordersRouter);
 
 
 /** ERROR HANDLING */
